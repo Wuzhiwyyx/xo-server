@@ -2,10 +2,10 @@ import createLogger from 'debug'
 import defer from 'golike-defer'
 import execa from 'execa'
 import fs from 'fs-extra'
+import generateId from 'cuid'
 import map from 'lodash/map'
 import { tap, delay } from 'promise-toolbox'
 import { invalidParameters } from 'xo-common/api-errors'
-import { v4 as generateUuid } from 'uuid'
 import {
   includes,
   isArray,
@@ -571,7 +571,7 @@ async function createVDIOnLVMWithoutSizeLimit (xapi, lvmSr, diskSize) {
   if (lvmSr.type !== 'lvm') {
     throw new Error('expecting a lvm sr type, got"' + lvmSr.type + '"')
   }
-  const uuid = generateUuid()
+  const uuid = generateId()
   const lvName = LV_PREFIX + uuid
   const vgName = VG_PREFIX + lvmSr.uuid
   const host = lvmSr.$PBDs[0].$host

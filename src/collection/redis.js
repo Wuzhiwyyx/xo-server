@@ -1,7 +1,7 @@
+import generateId from 'cuid'
 import { createClient as createRedisClient } from 'redis'
 import { difference, filter, forEach, isEmpty, keys as getKeys, map } from 'lodash'
 import { ignoreErrors, promisifyAll } from 'promise-toolbox'
-import { v4 as generateUuid } from 'uuid'
 
 import Collection, { ModelAlreadyExists } from '../collection'
 import { asyncMap } from '../utils'
@@ -109,7 +109,7 @@ export default class Redis extends Collection {
     return Promise.all(map(models, async model => {
       // Generate a new identifier if necessary.
       if (model.id === undefined) {
-        model.id = generateUuid()
+        model.id = generateId()
       }
       const { id } = model
 
