@@ -1236,7 +1236,6 @@ export default class Xapi extends XapiBase {
     return vmRef
   }
 
-
   @importLimit
   @deferrable
   async _importOvaVm ($defer, stream, {
